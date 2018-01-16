@@ -1,0 +1,16 @@
+Set below two environment variables to run the app:
+
+1. MYSQL_PASSWORD: Password for root user of mysql instance
+2. APP_SECRET_KEY: Required for encrypting session data by Flask
+
+To generate random secret key through python:
+
+>>> import os
+>>> os.urandom(24)
+b'Fnf>aV\xab\xbf@\x9dSwe\x8eC\xbe6\x0b\x9c\x05.\xad\xf5y'
+
+To avoid escape issues in shell variables, regenerate the key till there are no conflicting characters
+
+To run the app:
+
+$ python run.py

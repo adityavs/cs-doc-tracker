@@ -1,0 +1,4 @@
+venv
+migrations
+*.pyc
+set_env.sh
