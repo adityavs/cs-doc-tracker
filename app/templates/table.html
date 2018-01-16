@@ -20,7 +20,11 @@
     <tr>
       <td>{{ loop.index }}</td>
       {% for field in fields %}
-      <td>{{ item[field] }}</td>
+      <td>
+        {% if item[field] %}
+          {{ item[field] }}
+        {% endif %}
+      </td>
       {% endfor %}
       <td><a href="{{ url_for(edit_url, id = item['id']) }}">Edit</a> | <a href="{{ url_for(delete_url, id = item['id']) }}">Delete</a></td>
     </tr>
