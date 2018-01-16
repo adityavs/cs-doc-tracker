@@ -10,4 +10,4 @@ app.secret_key = os.environ['APP_SECRET_KEY']
 
 db = SQLAlchemy(app)
 
-from app import city, state
+from app import city, state, person
