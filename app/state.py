@@ -8,7 +8,7 @@ class State(db.Model):
     abbreviation = db.Column(db.String(2), unique = True, nullable = False)
     cities = db.relationship('City', lazy = True)
 
-@app.route('/states')
+@app.route('/states/')
 def states():
     states = State.query.all()
     
