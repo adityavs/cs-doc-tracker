@@ -10,7 +10,7 @@ class Organisation(db.Model):
     parent = db.relationship('Organisation', lazy = False)
     children = db.relationship('Organisation', lazy = True)
 
-@app.route('/organisations/')
+@app.route('/organisations')
 def organisations():
     organisations = Organisation.query.all()
     

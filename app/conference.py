@@ -10,7 +10,7 @@ class Conference(db.Model):
     city = db.Column(db.String(100), db.ForeignKey('city.name'), nullable = True)
     state = db.Column(db.String(2), db.ForeignKey('state.abbreviation'), nullable = True)
 
-@app.route('/conferences/')
+@app.route('/conferences')
 def conferences():
     conferences = Conference.query.all()
     

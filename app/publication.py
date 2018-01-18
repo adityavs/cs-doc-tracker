@@ -9,7 +9,7 @@ class Publication(db.Model):
     publication_date = db.Column(db.Date, nullable = False)
     publisher_id = db.Column(db.Integer, db.ForeignKey('organisation.id'), nullable = False)
 
-@app.route('/publications/')
+@app.route('/publications')
 def publications():
     publications = Publication.query.all()
     

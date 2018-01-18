@@ -6,7 +6,7 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String(200), unique = True, nullable = False)
 
-@app.route('/roles/')
+@app.route('/roles')
 def roles():
     roles = Role.query.all()
     

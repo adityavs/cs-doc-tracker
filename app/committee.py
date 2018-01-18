@@ -6,7 +6,7 @@ class Committee(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String(200), unique = True, nullable = False)
 
-@app.route('/committees/')
+@app.route('/committees')
 def committees():
     committees = Committee.query.all()
     
