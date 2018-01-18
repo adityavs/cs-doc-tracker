@@ -20,5 +20,3 @@ $ gcloud app deploy
 To browse the app:
 
 $ gcloud app browse
-
-This will fail but adding /cities, /states, /conferences etc. to the ned of url will work.
