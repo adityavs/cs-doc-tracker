@@ -1,7 +1,7 @@
-Set below two environment variables to run the app:
+Replace below two variables to run the app:
 
-1. MYSQL_PASSWORD: Password for root user of mysql instance
-2. APP_SECRET_KEY: Required for encrypting session data by Flask
+1. MYSQL_CONNECTION_STRING (in config.py.in to be renamed as config.py): Connection string for mysql instance
+2. APP_SECRET_KEY (in app/__init__.py.in to be renamed as app/__init__.py): Required for encrypting session data by Flask
 
 To generate random secret key through python:
 
@@ -9,8 +9,16 @@ To generate random secret key through python:
 >>> os.urandom(24)
 b'Fnf>aV\xab\xbf@\x9dSwe\x8eC\xbe6\x0b\x9c\x05.\xad\xf5y'
 
-To avoid escape issues in shell variables, regenerate the key till there are no conflicting characters
-
 To run the app:
 
 $ python run.py
+
+To deploy to gcloud:
+
+$ gcloud app deploy
+
+To browse the app:
+
+$ gcloud app browse
+
+This will fail but adding /cities, /states, /conferences etc. to the ned of url will work.
