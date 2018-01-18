@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 app.config.from_object('config')
 
-app.secret_key = os.environ['APP_SECRET_KEY']
+app.secret_key = 'APP_SECRET_KEY'
 
 db = SQLAlchemy(app)
 
-from app import city, state, person, organisation
+from app import city, state, person, organisation, committee, conference, role, publication
