@@ -26,13 +26,13 @@
         {% endif %}
       </td>
       {% endfor %}
-      <td><a href="{{ url_for(edit_url, id = item['id']) }}">Edit</a> | <a href="{{ url_for(delete_url, id = item['id']) }}">Delete</a></td>
+      <td><a href="{{ get_url(edit_url, edit_params, 'id', item['id']) }}">Edit</a> | <a href="{{ get_url(delete_url, delete_params, 'id', item['id']) }}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
   <tfoot>
     <tr>
-      <td><a href = "{{ url_for(add_url) }}">Add New</a></td>
+      <td><a href = "{{ get_url(add_url, add_params) }}">Add New</a></td>
     </tr>
   </tfoot>
 </table>

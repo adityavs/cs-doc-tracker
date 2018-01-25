@@ -12,4 +12,4 @@ app.url_map.strict_slashes = False
 
 db = SQLAlchemy(app)
 
-from app import city, state, person, organisation, committee, conference, role, publication
+from app import city, state, person, organisation, committee, conference, role, publication, author
