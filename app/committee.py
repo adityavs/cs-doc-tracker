@@ -1,6 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from app import app, db
 from sqlalchemy import exc
+from util import get_url
 
 class Committee(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
@@ -10,7 +11,7 @@ class Committee(db.Model):
 def committees():
     committees = Committee.query.all()
     
-    return render_template('table.html', items = committees, headings = ['Name'], fields = ['name'], edit_url = 'committees_edit', delete_url = 'committees_delete', add_url = 'committees_add')
+    return render_template('table.html', items = committees, headings = ['Name'], fields = ['name'], edit_url = 'committees_edit', delete_url = 'committees_delete', add_url = 'committees_add', get_url = get_url)
 
 @app.route('/committees/add', methods=['POST', 'GET'])
 def committees_add():

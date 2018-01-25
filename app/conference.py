@@ -1,6 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from app import app, db
 from sqlalchemy import exc
+from util import get_url
 
 class Conference(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
@@ -14,7 +15,7 @@ class Conference(db.Model):
 def conferences():
     conferences = Conference.query.all()
     
-    return render_template('table.html', items = conferences, headings = ['Name', 'Start Date', 'End Date', 'City', 'State'], fields = ['name', 'start_date', 'end_date', 'city', 'state'], edit_url = 'conferences_edit', delete_url = 'conferences_delete', add_url = 'conferences_add')
+    return render_template('table.html', items = conferences, headings = ['Name', 'Start Date', 'End Date', 'City', 'State'], fields = ['name', 'start_date', 'end_date', 'city', 'state'], edit_url = 'conferences_edit', delete_url = 'conferences_delete', add_url = 'conferences_add', get_url = get_url)
 
 @app.route('/conferences/add', methods=['POST', 'GET'])
 def conferences_add():

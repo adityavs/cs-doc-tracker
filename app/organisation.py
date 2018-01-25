@@ -1,6 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from app import app, db
 from sqlalchemy import exc
+from util import get_url
 
 class Organisation(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
@@ -14,7 +15,7 @@ class Organisation(db.Model):
 def organisations():
     organisations = Organisation.query.all()
     
-    return render_template('table.html', items = organisations, headings = ['Name', 'Abbreviation', 'Parent Id'], fields = ['name', 'abbreviation', 'parent_id'], edit_url = 'organisations_edit', delete_url = 'organisations_delete', add_url = 'organisations_add')
+    return render_template('table.html', items = organisations, headings = ['Name', 'Abbreviation', 'Parent Id'], fields = ['name', 'abbreviation', 'parent_id'], edit_url = 'organisations_edit', delete_url = 'organisations_delete', add_url = 'organisations_add', get_url = get_url)
 
 @app.route('/organisations/add', methods=['POST', 'GET'])
 def organisations_add():

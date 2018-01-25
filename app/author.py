@@ -4,7 +4,7 @@ from sqlalchemy import exc
 from sqlalchemy.sql import select
 from util import get_url
 
-class Authors(db.Model):
+class Author(db.Model):
     publication_id = db.Column(db.Integer, db.ForeignKey('publication.id'), primary_key = True)
     author_id = db.Column(db.Integer, db.ForeignKey('person.id'), primary_key = True)
     publication = db.relationship('Publication', lazy = False)
@@ -12,7 +12,7 @@ class Authors(db.Model):
 
 @app.route('/publications/<publication_id>/authors')
 def authors(publication_id):
-    authors = db.session.query(Authors).filter(Authors.publication_id == publication_id)
+    authors = db.session.query(Author).filter(Author.publication_id == publication_id)
 
     url_params = { 'publication_id' : publication_id }
 
@@ -26,7 +26,7 @@ def authors_add(publication_id):
         author_id = db.session.scalar(select([person.Person.__table__.c.id]).where(person.Person.__table__.c.name == name))
 
         if author_id:
-            publication_author_mapping = Authors(publication_id = publication_id, author_id = author_id)
+            publication_author_mapping = Author(publication_id = publication_id, author_id = author_id)
             db.session.add(publication_author_mapping)
 
             db.session.commit()
@@ -37,27 +37,26 @@ def authors_add(publication_id):
 
     return render_template('form.html', title = 'Add Author', submit_url = "", fields = zip(['Name'], ['name']), item = None, action = 'Add')
 
-@app.route('/states/edit/<id>', methods=['POST', 'GET'])
-def authors_edit(id):
-    state = State.query.get(id)
+@app.route('/publications/<publication_id>/authors/edit/<id>', methods=['POST', 'GET'])
+def authors_edit(publication_id, id):
+    author = Author.query.filter(Author.publication_id == publication_id, Author.author_id == id).first()
 
     if request.method == 'POST':
-        if state:
-            state.name = request.form['name']
-            state.abbreviation = request.form['abbreviation']
+        if author:
+            author.author.name = request.form['name']
 
             db.session.commit()
 
-        return redirect(url_for('states'))
+        return redirect(url_for('authors', publication_id = publication_id))
 
-    return render_template('form.html', title = 'Edit State', submit_url = url_for('states_edit', id = id), fields = zip(['Name', 'Abbreviation'], ['name', 'abbreviation']), item = state, action = 'Edit')
+    return render_template('form.html', title = 'Edit Author', submit_url = url_for('authors_edit', publication_id = publication_id, id = id), fields = zip(['Name'], ['name']), item = author.author, action = 'Edit')
 
-@app.route('/states/delete/<id>', methods=['POST', 'GET'])
-def authors_delete(id):
-    state = State.query.get(id)
+@app.route('/publications/<publication_id>/authors/delete/<id>', methods=['POST', 'GET'])
+def authors_delete(publication_id, id):
+    author = Author.query.filter(Author.publication_id == publication_id, Author.author_id == id).first()
 
-    if state:
-        db.session.delete(state)
+    if author:
+        db.session.delete(author)
 
         try:
             db.session.commit()
@@ -65,4 +64,4 @@ def authors_delete(id):
             db.session().rollback()
             return "Delete failed due to operation error."
 
-    return redirect(url_for('states'))
+    return redirect(url_for('authors', publication_id = publication_id))
