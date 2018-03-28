@@ -6,3 +6,5 @@ set_env.sh
 app/__init__.py
 config.py
 patch_secrets.sh
+ui/node_modules
+ui/temp-src
